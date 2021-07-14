@@ -9,20 +9,42 @@
 </head>
 
 <body>
-    <div class="test" id=test>ss </div>
+
+    <input type="text" id=message class='message'>
+    <button id=sendMsg onclick="send()">Send Message</button>
+    <div class="all" id=all>
+        <% for(let i=0; i < Object.keys(messages).length; i++){ %>
+            <p>'<%= messages[Object.keys(messages)[i]].user %> said <%= messages[Object.keys(messages)[i]].message %>'
+            </p>
+            <% } %>
+    </div>
     <script>
-        var roomId = window.location.pathname.split('/room/')[1]; // 
-        console.log(roomId)
+        const send = () => {
+            const messageInput = document.querySelector('.message')
+            socket.emit('message', { user: '<%= user %>', message: messageInput.value })
+        }
+
+        var roomId = window.location.pathname.split('/')[2];
+
         const socket = io('http://localhost:5000', {
             query: 'room=' + roomId
         })
+
         socket.on('connection')
-        socket.on('message', () => {
-            document.getElementById('test').innerHTML = 's' + document.getElementById('test').innerHTML
+        socket.on('message', (data) => {
+            const para = document.createElement("p");
+            const node = document.createTextNode(data.user + ' said ' + data.message);
+            para.appendChild(node);
+            const element = document.getElementById("all");
+            element.appendChild(para);
+            console.log(data.user + ' said ' + data.message + ' in room ' + roomId)
 
         })
-
     </script>
+
+
+
+
 </body>
 
 </html>
