@@ -14,11 +14,12 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => res.redirect('/landing'))
-app.get('/landing/:roomid/:username', (req, res) => res.render('landing', { ri: req.params.roomid || '', un: req.params.username || '' }))
+app.get('/landing', (req, res) => res.render('landing'))
 
 keys = ['milad']
 
 app.get('/room/:roomId/:username', async (req, res) => {
+	req.params.roomId = req.params.roomId.toUpperCase()
 	let username = req.params.username;
 	if (username.length < 2 || username.match(/[^\x00-\x7F]+/gi) || username[username.length - 1] === ' ' || username[0] === ' ') res.redirect('/')
 	if ((req.params.roomId) ? req.params.roomId.length !== 10 : false) return res.send("How'd you get here?")

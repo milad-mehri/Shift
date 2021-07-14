@@ -1,6 +1,5 @@
 
 function validateInfo() {
-    <%   console.log('hi') %>
     let username = document.getElementById("username").value;
     let uError = document.getElementById("usernameerror")
     let code = document.getElementById("roomcode").value;
@@ -19,9 +18,11 @@ function validateInfo() {
     if (code.length < 10) {
         return cError.innerHTML = 'Invalid 10-character code.'
     } else {
-        return cError.innerHTML = ''
+        cError.innerHTML = ''
     
     }
+
+    window.location.replace(`/room/${code}/${username}`);
 }
 
 document.addEventListener("keyup", function (event) {
