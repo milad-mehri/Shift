@@ -3,15 +3,14 @@ const cache = {}
 const roomSchema = require('./models/roomSchema')
 
 const makeRoom = async (roomId) => {
-    let room = await new roomSchema({ id: roomId }).save();
+    let room = await new roomSchema({ id: roomId}).save();
     return room
 }
 
 const message = async (roomId, messageID, message) => {
-    console.log("hi")
     roomSchema.findOneAndUpdate({ id: roomId }, { $set: { [messageID]: message } }, function (err, docs) {
-        console.log('bye')
-        return docs
+			console.log(docs)
+				  return docs
     })
 }
 

@@ -26,7 +26,7 @@
 
         var roomId = window.location.pathname.split('/')[2];
 
-        const socket = io('http://localhost:5000', {
+        const socket = io('https://ChatSite.miladmehri.repl.co', {
             query: 'room=' + roomId
         })
 

@@ -26,7 +26,8 @@ app.get('/room/:roomId/:username', async (req, res) => {
 
 
 	let room = await db.getRoom(req.params.roomId) || await db.makeRoom(req.params.roomId)
-	res.render(`room`, { messages: room.messages, user: username })
+
+	res.render(`room`, { messages: room.messages || {}, user: username })
 
 })
 
@@ -40,15 +41,17 @@ io.on("connection", socket => {
 	socket.join(room);
 	console.log('Someone just joined ' + room)
 
-	socket.on("message", (data) => {
-		db.message(room,`messages.${Date.now().toString()}`, data)
+	socket.on("message", async (data) => {
+		data.message = data.message.replace('/</gi', '&lt;')
+		console.log(data)
+		await db.message(room, `messages.${Date.now().toString()}`, data)
 		io.in(room).emit('message', data)
 	})
 
 });
 
 
-server.listen(5000, function () {
+server.listen(5000, function() {
 
 	console.log("Listening on port 3000")
 })
