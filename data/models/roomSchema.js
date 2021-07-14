@@ -6,8 +6,16 @@ const roomSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    messages: { type: Object },
-    users: { type: Object }
+    messages: {
+        type: Object,
+        required: true,
+        default: {}
+    },
+    users: {
+        type: Object,
+        required: true,
+        default: {}
+    }
 })
 
 module.exports = mongoose.model('rooms', roomSchema)

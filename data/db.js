@@ -9,10 +9,11 @@ const makeRoom = async (roomId) => {
 
 const message = async (roomId, messageID, message) => {
     roomSchema.findOneAndUpdate({ id: roomId }, { $set: { [messageID]: message } }, function (err, docs) {
-			console.log(docs)
 				  return docs
     })
 }
+
+
 
 const getRoom = async (roomId) => {
     const result = await roomSchema.findOne({ id: roomId })

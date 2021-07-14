@@ -5,44 +5,204 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="https://cdn.socket.io/3.0.5/socket.io.min.js"></script>
 </head>
 
 <body>
-
-    <input type="text" id=message class='message'>
-    <button id=sendMsg onclick="send()">Send Message</button>
-    <div class="all" id=all>
-        <% for(let i=0; i < Object.keys(messages).length; i++){ %>
-            <p>'<%= messages[Object.keys(messages)[i]].user %> said <%= messages[Object.keys(messages)[i]].message %>'
-            </p>
-            <% } %>
+    <!--  -->
+    <div class="main">
+        <div class="header">
+            <div class="title"><a href="/">ChatApp</a></div>
+            <a href="/">Home</a>
+        </div>
+        <div class="messageSection">
+            <div id=messages class="messages">
+                <% for(let i=0; i < Object.keys(messages).length; i++){ %>
+                    <script>scroll()</script>
+                    <div class="message">
+                        <div class="info">
+                            <div class="username">
+                                <%= messages[Object.keys(messages)[i]].user %>
+                            </div>
+                            <div class="content">
+                                <%= messages[Object.keys(messages)[i]].message %>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+            <input class="messageInput" id=messageInput type="text" placeholder="Send message to <%=roomId %>">
+        </div>
     </div>
+
     <script>
+
+ 
+
         const send = () => {
-            const messageInput = document.querySelector('.message')
+            const messageInput = document.querySelector('.messageInput')
             socket.emit('message', { user: '<%= user %>', message: messageInput.value })
         }
 
         var roomId = window.location.pathname.split('/')[2];
 
-        const socket = io('https://ChatSite.miladmehri.repl.co', {
+        const socket = io('http://localhost:5000', {
             query: 'room=' + roomId
         })
 
         socket.on('connection')
         socket.on('message', (data) => {
-            const para = document.createElement("p");
-            const node = document.createTextNode(data.user + ' said ' + data.message);
-            para.appendChild(node);
-            const element = document.getElementById("all");
-            element.appendChild(para);
-            console.log(data.user + ' said ' + data.message + ' in room ' + roomId)
 
+            var myDiv = document.getElementById("messages");
+            myDiv.innerHTML = myDiv.innerHTML + `     <div class="message">
+                    <div class="info">                        <div class="username">${data.user}</div>                        <div class="content">${data.message}</div>
+                    </div>                </div>` ;
+
+            scroll()
         })
+        function scroll() {
+            var elem = document.getElementById('messages');
+            elem.scrollTop = elem.scrollHeight;
+        }
+
+        var inputA = document.getElementById("messageInput");
+        inputA.addEventListener("keydown", function (e) {
+
+
+            if (e.code === "Enter") {
+                if (inputA.value.replace(/^\s+$/gi, '') !== "") {
+                    send()
+                    inputA.value = ""
+                }
+            }
+        });
+
     </script>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: Open Sans;
+
+        }
+
+        .main {
+            background-color: #2D2D3F;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 10px 0px 10px 0px;
+            background-color: #00C16E;
+            width: 100vw;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .title {
+            color: white;
+            width: 40%;
+            font-weight: 700;
+        }
+
+        .button {
+            display: flex;
+            justify-content: flex-end;
+            width: 40%;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .messageSection {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-direction: column;
+            height: calc(100vh - 80px);
+
+
+        }
+
+        #messageInput {
+
+            width: min(80%, 1000px);
+
+            padding: 25px 10px 25px 20px;
+            background: #39394D;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            border: none;
+            color: white;
+
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+
+
+
+        .messages {
+
+            flex-direction: column;
+            width: min(80%, 1000px);
+            margin: 20px 0px 20px 0px;
+            display: flex;
+            justify-content: center;
+            overflow: scroll;
+            -ms-overflow-style: none;
+            /* Internet Explorer 10+ */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .messages::-webkit-scrollbar {
+            display: none;
+            /* Safari and Chrome */
+        }
+
+        .message {
+            margin: 10px 0px 10px 0px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            padding: 20px;
+            background-color: #35354F;
+        }
+
+        .message:hover {
+            opacity: 0.5;
+        }
+
+        .info .username {
+            font-weight: 600;
+            color: white;
+            padding-bottom: 10px;
+        }
+
+        .info .content {
+            color: white;
+        }
+    </style>
 
 
 </body>

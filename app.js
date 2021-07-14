@@ -27,7 +27,7 @@ app.get('/room/:roomId/:username', async (req, res) => {
 
 	let room = await db.getRoom(req.params.roomId) || await db.makeRoom(req.params.roomId)
 
-	res.render(`room`, { messages: room.messages || {}, user: username })
+	res.render(`room`, { messages: room.messages || {}, user: username, roomId: req.params.roomId })
 
 })
 
@@ -37,13 +37,12 @@ io.on("connection", socket => {
 
 
 
-	var room = socket.handshake.query.room;
+	var room = socket.handshake.query.room.toUpperCase();
 	socket.join(room);
 	console.log('Someone just joined ' + room)
 
 	socket.on("message", async (data) => {
-		data.message = data.message.replace('/</gi', '&lt;')
-		console.log(data)
+		//  data.message = data.message.replace('/</gi, '&lt;')
 		await db.message(room, `messages.${Date.now().toString()}`, data)
 		io.in(room).emit('message', data)
 	})
@@ -51,7 +50,7 @@ io.on("connection", socket => {
 });
 
 
-server.listen(5000, function() {
+server.listen(5000, function () {
 
 	console.log("Listening on port 3000")
 })
