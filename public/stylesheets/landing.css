@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+body {
+    font-family: Open Sans;
+    margin: 0;
+    padding: 0;
+    background-color: #2D2D3F;
+    display: flex;
+    align-items: center;
+}
+
+h5 {
+    font-size: 15px;
+    font-weight: 400;
+    color: red; 
+    margin: 0px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+video {
+    width: 45vw;
+}
+
+/* 
+.video{
+    width: 775px;
+    height: 420px;
+    border-radius: 20px; 
+    overflow: hidden; 
+} */
+
+.title h1 {
+    font-size: min(100px, 5vw);
+    font-weight: 700;
+    padding: 0px;
+    margin: 0px;
+}
+
+.description p {
+    font-style: normal;
+    font-weight: bold;
+    font-size: min(36px, 2vw);
+}
+
+.info {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    margin-left: 75px;
+}
+
+.lefthalf {
+    width: 60%;
+    height: 100vh;
+}
+
+.righthalf {
+    background-color: #39394D;
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.righthalf .input {
+    margin: 100px ;
+    width: 100%;
+}
+
+.righthalf .input p {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.righthalf input {
+    background-color: #2D2D3F;
+    width: 90%;
+    max-width: 300px;
+    height: 60px;
+    border: 2px solid #199EF7;
+    box-sizing: border-box;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.righthalf .input .buttons {
+    margin-top: 30px;
+}
+
+.righthalf .input .buttons button {
+    color: white;
+    font-family: Open Sans;
+    font-weight: bold;
+    font-size: 14px;
+    width: 150px;
+    height: 60px;
+    background: #2D2D3F;
+    border: none;
+    border-radius: 22px;
+}
+
+.righthalf .input .buttons button:hover {
+    opacity: 0.75;
+    transition: 0.3s;
+}
+
+.secbut {
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .secbut {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}
+
+/* @media only screen and (max-width: 1100px) {
+    .lefthalf {
+        width: 40%;
+    }
+    .righthalf {
+        width: 60%;
+    }
+} */
+
+@media only screen and (max-width: 900px) {
+    .lefthalf {
+        visibility: hidden;
+        display: none;
+    }
+    .righthalf {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .righthalf .input {
+        margin: 50px;
+        width: 100%;
+    }
+    .secbut {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}

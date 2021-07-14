@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="javascript/landing.js"></script>
+    <link rel="stylesheet" href="stylesheets/landing.css">
+</head>
+
+<body>
+    <div class="lefthalf">
+        <div class="info">
+            <div class="title">
+                <h1>ChatApp</h1>
+            </div>
+
+            <div class="description">
+                <p>Create temperary chat rooms in seconds!</p>
+            </div>
+
+            <div class="video"> <video muted="" webkit-playsinline="true" playsinline="" autoplay="" loop=""
+                    src="https://cms.replit.com/assets/landing.mp4"></video>
+            </div>
+        </div>
+    </div>
+
+    <div class="righthalf">
+        <div class="input">
+            <p>Join:</p>
+            <h5 id=usernameerror></h5>
+
+            <input id=username maxlength="10" type="text" placeholder="Username">
+            <h5 id=roomcodeerror></h5>
+            <input style="text-transform: uppercase; margin-top:0px;" id=roomcode maxlength="10" type="text"
+                placeholder="Room Code">
+            <div class="buttons">
+                <button id=submitButton type="button" onclick="validateInfo()">JOIN</button>
+                <button type="button" class="secbut">CREATE NEW</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
