@@ -17,9 +17,8 @@
             <a href="/">Home</a>
         </div>
         <div class="messageSection">
-            <div id=messages class="messages">
+            <div id=messages class="messages" onload="scroll()">
                 <% for(let i=0; i < Object.keys(messages).length; i++){ %>
-                    <script>scroll()</script>
                     <div class="message">
                         <div class="info">
                             <div class="username">
