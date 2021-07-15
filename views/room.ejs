@@ -44,7 +44,7 @@
 
         const send = () => {
             const messageInput = document.querySelector('.messageInput')
-            socket.emit('message', { user: '<%= user %>', message: messageInput.value })
+            socket.emit('message', { user: '<%= user %>', message: messageInput.value.replace(/</gi, '&lt;') })
         }
 
         var roomId = window.location.pathname.split('/')[2];
