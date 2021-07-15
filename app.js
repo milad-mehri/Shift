@@ -27,7 +27,11 @@ app.get('/room/:roomId/:username', async (req, res) => {
 
 	let room = await db.getRoom(req.params.roomId) || await db.makeRoom(req.params.roomId)
 
-	res.render(`room`, { messages: room.messages || {}, user: username, roomId: req.params.roomId })
+	// if(Object.keys(room.messages)[0]) {
+	// 	if(Object.keys(room.messages)[0] + Date.now)
+	// }
+
+	res.render(`room`, { messages: room.messages || {}, user: username, roomId: req.params.roomId, db:db })
 
 })
 

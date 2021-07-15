@@ -18,8 +18,9 @@
         </div>
         <div class="messageSection">
             <div id=messages class="messages" onload="scroll()">
-                <% for(let i=0; i < Object.keys(messages).length; i++){ if(Object.keys(messages)[i] + 43200000>
-                    Date.now() ) {
+                <% for(let i=0; i < Object.keys(messages).length; i++){ 
+     
+                    if(parseInt(Object.keys(messages)[i]) + (3600000*12) >  Date.now() ) {
                     %>
                     <div class="message">
                         <div class="info">
@@ -69,7 +70,6 @@
 
         var inputA = document.getElementById("messageInput");
         inputA.addEventListener("keydown", function (e) {
-            console.log(e.code)
             if (e.code === "Enter") {
                 if (inputA.value.replace(/^\s+$/gi, '') !== "") {
                     send()
