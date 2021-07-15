@@ -46,7 +46,7 @@
 
         var roomId = window.location.pathname.split('/')[2];
 
-        const socket = io('http://localhost:5000', {
+        const socket = io(window.location.host, {
             query: 'room=' + roomId
         })
 
@@ -67,9 +67,8 @@
 
         var inputA = document.getElementById("messageInput");
         inputA.addEventListener("keydown", function (e) {
-
-
-            if (e.code === "Enter") {
+						console.log(e.code)
+            if (e.code === "Enter" ) {
                 if (inputA.value.replace(/^\s+$/gi, '') !== "") {
                     send()
                     inputA.value = ""
