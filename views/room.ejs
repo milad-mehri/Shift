@@ -13,12 +13,14 @@
     <!--  -->
     <div class="main">
         <div class="header">
-            <div class="title"><a href="/">ChatApp</a></div>
+            <div class="title"><a href="/">Shift</a></div>
             <a href="/">Home</a>
         </div>
         <div class="messageSection">
             <div id=messages class="messages" onload="scroll()">
-                <% for(let i=0; i < Object.keys(messages).length; i++){ %>
+                <% for(let i=0; i < Object.keys(messages).length; i++){ if(Object.keys(messages)[i] + 43200000>
+                    Date.now() ) {
+                    %>
                     <div class="message">
                         <div class="info">
                             <div class="username">
@@ -29,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <% } %>
+                    <% } }%>
             </div>
             <input class="messageInput" id=messageInput type="text" placeholder="Send message to <%=roomId %>">
         </div>
@@ -37,7 +39,7 @@
 
     <script>
 
- 
+
 
         const send = () => {
             const messageInput = document.querySelector('.messageInput')
@@ -67,8 +69,8 @@
 
         var inputA = document.getElementById("messageInput");
         inputA.addEventListener("keydown", function (e) {
-						console.log(e.code)
-            if (e.code === "Enter" ) {
+            console.log(e.code)
+            if (e.code === "Enter") {
                 if (inputA.value.replace(/^\s+$/gi, '') !== "") {
                     send()
                     inputA.value = ""
