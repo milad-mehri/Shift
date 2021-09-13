@@ -1,7 +1,6 @@
 # Shift
 
-![Demo](Screen Shot 2021-09-12 at 5.01.34 PM.png)
-
+![Demo](Screen%20Shot%202021-09-12%20at%205.01.34%20PM.png)
 To self host:
 
 1. Clone repository
